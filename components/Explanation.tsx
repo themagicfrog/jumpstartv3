@@ -77,7 +77,7 @@ const games = [
     image: '/assets/infinitylost.gif',
     alt: 'Infinity Lost',
     creator: 'Violet, 16 years old, USA',
-    description: 'lost in a infinitey looping space shuttle, our protagonist John Loop has to escape his unfortunate circumstance',
+    description: 'Lost in a infinitey looping space shuttle, you have to escape your unfortunate circumstance',
     link: 'https://vivithequeen.itch.io/infinity-lost'
   },
   {
@@ -85,7 +85,7 @@ const games = [
     image: '/assets/taleoforbis.png',
     alt: 'Tales of Orbis',
     creator: 'Jake, 17 years old, India',
-    description: 'travel as Orbis, a lone orb created from the ashes of gods to escape Null and reach the Core!',
+    description: 'Travel as Orbis, a lone orb created from the ashes of gods to escape Null and reach the Core',
     link: 'https://jakeojeff.itch.io/tales-of-orbis'
   },
   {
@@ -93,7 +93,7 @@ const games = [
     image: '/assets/onemoreday.png',
     alt: 'One More Day',
     creator: 'Zach, 16 years old, USA',
-    description: 'when it seems like you ran out of time, time just keeps repeating...',
+    description: 'When it seems like you ran out of time, time just keeps repeating...',
     link: 'https://bolb2019.itch.io/one-more-day-gmtk-2025'
   },
   {
@@ -101,7 +101,7 @@ const games = [
     image: '/assets/trustme.png',
     alt: 'Trust me',
     creator: 'Avni, 16 years old, USA',
-    description: 'trust me. or don\'t. the choice is yours.',
+    description: 'Trust me. or don\'t. The choice is yours.',
     link: 'https://of-knee.itch.io/trust-me'
   },
   {
@@ -109,7 +109,7 @@ const games = [
     image: '/assets/okrim.gif',
     alt: 'Okrim',
     creator: 'Ernests, 17 years old, Latvia',
-    description: 'a point and click psychological horror game, where you are ghost going trough daily routine until one day you break free',
+    description: 'A point and click psychological horror game, you are ghost going through daily routine until you break free',
     link: 'https://n0o0b090lv.itch.io/okrim-updated'
   },
   {
@@ -117,7 +117,7 @@ const games = [
     image: '/assets/thebirb.png',
     alt: 'The Birb',
     creator: 'Neya, 12 years old, USA',
-    description: 'a platformer where you fly around and collect candy for the winter',
+    description: 'A platformer where you fly around and collect candy for the winter',
     link: 'https://that-blob.itch.io/the-birb'
   }
 ];
@@ -137,17 +137,15 @@ export default function Explanation() {
     if (!carousel) return;
 
     const cardWidth = 380;
-    const gap = 32; // 2rem
+    const gap = 32;
     const totalCardWidth = cardWidth + gap;
     const singleSetWidth = totalCardWidth * games.length;
-    // We have 3 sets, so the middle set starts at singleSetWidth
     const middleSetStart = singleSetWidth;
     const middleSetEnd = singleSetWidth * 2;
 
     const handleScroll = () => {
       const scrollLeft = carousel.scrollLeft;
       
-      // When scrolled past the middle set (second set), reset to beginning of middle set
       if (scrollLeft >= middleSetEnd - 10) {
         carousel.style.scrollBehavior = 'auto';
         carousel.scrollLeft = scrollLeft - singleSetWidth;
@@ -155,7 +153,6 @@ export default function Explanation() {
           carousel.style.scrollBehavior = '';
         }, 0);
       }
-      // When scrolled backwards before middle set, jump to end of middle set
       else if (scrollLeft < middleSetStart) {
         carousel.style.scrollBehavior = 'auto';
         carousel.scrollLeft = scrollLeft + singleSetWidth;
@@ -167,10 +164,8 @@ export default function Explanation() {
 
     carousel.addEventListener('scroll', handleScroll, { passive: true });
     
-    // Initialize scroll position to start of middle set
     carousel.scrollLeft = middleSetStart;
 
-    // Auto-scroll function
     const startAutoScroll = () => {
       if (autoScrollIntervalRef.current) {
         clearInterval(autoScrollIntervalRef.current);
@@ -209,8 +204,27 @@ export default function Explanation() {
           padding: '1rem 2rem',
           marginTop: '2rem',
           marginBottom: '0',
-          paddingBottom: '0.5rem'
+          paddingBottom: '0.5rem',
+          position: 'relative'
         }}>
+          {section.title === 'NEVER MADE A GAME BEFORE?' && (
+            <Image
+              src="/assets/explanation-stars2.svg"
+              alt="Stars"
+              width={150}
+              height={150}
+              style={{ position: 'absolute', right: '2rem', top: '-1rem' }}
+            />
+          )}
+          {section.title === 'HAVE SOME EXPERIENCE?' && (
+            <Image
+              src="/assets/explanation-stars1.svg"
+              alt="Stars"
+              width={150}
+              height={150}
+              style={{ position: 'absolute', left: '2rem', top: '-1rem' }}
+            />
+          )}
           <h2 style={{ textAlign: 'center', color: 'white', margin: 0, fontSize: '5rem' }}>{section.title}</h2>
         </div>
       )}
@@ -295,50 +309,92 @@ export default function Explanation() {
         
         <div style={{ backgroundColor: '#224CCA', display: 'flex', justifyContent: 'center', gap: '3rem', padding: '0rem 8rem 2rem 8rem', marginTop: '0' }}>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative' }}>
-            <div style={{ position: 'relative' }}>
+            <div style={{ position: 'relative', zIndex: 20 }}>
               <Image
                 src="/assets/explanation-title1.svg"
                 alt="Title 1"
                 width={400}
                 height={120}
               />
-              <div style={{ position: 'absolute', top: '50%', left: '35%', transform: 'translateY(-50%)', textAlign: 'left', zIndex: 10, pointerEvents: 'none' }}>
+              <div style={{ position: 'absolute', top: '50%', left: '35%', transform: 'translateY(-50%)', textAlign: 'left', zIndex: 21, pointerEvents: 'none' }}>
                 <span style={{ fontSize: '3.5rem', color: '#EE0073', fontWeight: 'bold', letterSpacing: '0.5rem' }}>BUILD</span>
               </div>
             </div>
-            <div style={{ backgroundColor: '#101E45', borderRadius: '1rem', width: '325px', height: '300px', marginTop: '-3rem', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', padding: '4rem 1rem 1rem 1rem' }}>
+            <div style={{ backgroundColor: '#101E45', borderRadius: '1rem', width: '325px', height: '300px', marginTop: '-2.5rem', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', padding: '4rem 1rem 1rem 1rem', position: 'relative', zIndex: 10 }}>
+              <Image
+                src="/assets/explanation-godorpheus.svg"
+                alt="Godorpheus"
+                width={150}
+                height={150}
+                style={{ position: 'absolute', bottom: '-3.5rem', left: '-1rem', zIndex: 10 }}
+              />
+              <Image
+                src="/assets/explanation-heidi.svg"
+                alt="Heidi"
+                width={150}
+                height={150}
+                style={{ position: 'absolute', bottom: '-3.5rem', right: '-2.5rem', zIndex: 10 }}
+              />
               <p style={{ color: 'white', textAlign: 'center', margin: 0, fontSize: '2rem', lineHeight: '1.2' }}>Use our beginner-friendly resources to make your own 2D platformer game.</p>
             </div>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative' }}>
-            <div style={{ position: 'relative' }}>
+            <div style={{ position: 'relative', zIndex: 20 }}>
               <Image
                 src="/assets/explanation-title2.svg"
                 alt="Title 2"
                 width={400}
                 height={120}
               />
-              <div style={{ position: 'absolute', top: '50%', left: '35%', transform: 'translateY(-50%)', textAlign: 'left', zIndex: 10, pointerEvents: 'none' }}>
+              <div style={{ position: 'absolute', top: '50%', left: '35%', transform: 'translateY(-50%)', textAlign: 'left', zIndex: 21, pointerEvents: 'none' }}>
                 <span style={{ fontSize: '3.5rem', color: '#EE0073', fontWeight: 'bold', letterSpacing: '0.5rem' }}>SHIP</span>
               </div>
             </div>
-            <div style={{ backgroundColor: '#101E45', borderRadius: '1rem', width: '325px', height: '300px', marginTop: '-3rem', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', padding: '4rem 1rem 1rem 1rem' }}>
+            <div style={{ backgroundColor: '#101E45', borderRadius: '1rem', width: '325px', height: '300px', marginTop: '-2.5rem', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', padding: '4rem 1rem 1rem 1rem', position: 'relative', zIndex: 10 }}>
+              <Image
+                src="/assets/explanation-console.svg"
+                alt="Console"
+                width={240}
+                height={240}
+                style={{ position: 'absolute', bottom: '-6.5rem', left: '-3.5rem', zIndex: 10 }}
+              />
+              <Image
+                src="/assets/explanation-orpheus.svg"
+                alt="Orpheus"
+                width={220}
+                height={220}
+                style={{ position: 'absolute', bottom: '-4rem', right: '-5rem', zIndex: 10 }}
+              />
               <p style={{ color: 'white', textAlign: 'center', margin: 0, fontSize: '2rem', lineHeight: '1.2' }}>Upload your game to Itch.io and Github, then submit to the form.</p>
             </div>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative' }}>
-            <div style={{ position: 'relative' }}>
+            <div style={{ position: 'relative', zIndex: 20 }}>
               <Image
                 src="/assets/explanation-title3.svg"
                 alt="Title 3"
                 width={400}
                 height={120}
               />
-              <div style={{ position: 'absolute', top: '50%', left: '35%', transform: 'translateY(-50%)', textAlign: 'left', zIndex: 10, pointerEvents: 'none' }}>
+              <div style={{ position: 'absolute', top: '50%', left: '35%', transform: 'translateY(-50%)', textAlign: 'left', zIndex: 21, pointerEvents: 'none' }}>
                 <span style={{ fontSize: '3.5rem', color: '#EE0073', fontWeight: 'bold', letterSpacing: '0.5rem' }}>EARN</span>
               </div>
             </div>
-            <div style={{ backgroundColor: '#101E45', borderRadius: '1rem', width: '325px', height: '300px', marginTop: '-3rem', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', padding: '4rem 1rem 1rem 1rem' }}>
+            <div style={{ backgroundColor: '#101E45', borderRadius: '1rem', width: '325px', height: '300px', marginTop: '-2.5rem', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', padding: '4rem 1rem 1rem 1rem', position: 'relative', zIndex: 10 }}>
+              <Image
+                src="/assets/explanation-tamagotchi.svg"
+                alt="Tamagotchi"
+                width={190}
+                height={190}
+                style={{ position: 'absolute', bottom: '-3.5rem', left: '-3rem', zIndex: 10 }}
+              />
+              <Image
+                src="/assets/explanation-trophy.svg"
+                alt="Trophy"
+                width={190}
+                height={190}
+                style={{ position: 'absolute', bottom: '-3.5rem', right: '-5rem', zIndex: 10 }}
+              />
               <p style={{ color: 'white', textAlign: 'center', margin: 0, fontSize: '2rem', lineHeight: '1.2' }}>Earn a stickersheet and a grant to buy a game to play. Enjoy!</p>
             </div>
           </div>
@@ -348,66 +404,101 @@ export default function Explanation() {
         
         <div style={{ backgroundColor: '#224CCA', display: 'flex', justifyContent: 'center', gap: '3rem', padding: '0rem 8rem 2rem 8rem', marginTop: '0' }}>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative' }}>
-            <div style={{ position: 'relative' }}>
+            <div style={{ position: 'relative', zIndex: 20 }}>
               <Image
                 src="/assets/exxplanation-title1-2.svg"
                 alt="Title 1"
                 width={400}
                 height={120}
               />
-              <div style={{ position: 'absolute', top: '50%', left: '35%', transform: 'translateY(-50%)', textAlign: 'left', zIndex: 10, pointerEvents: 'none' }}>
+              <div style={{ position: 'absolute', top: '50%', left: '35%', transform: 'translateY(-50%)', textAlign: 'left', zIndex: 21, pointerEvents: 'none' }}>
                 <span style={{ fontSize: '3.5rem', color: '#EE0073', fontWeight: 'bold', letterSpacing: '0.5rem' }}>BUILD</span>
               </div>
             </div>
-            <div style={{ backgroundColor: '#101E45', borderRadius: '1rem', width: '280px', height: '300px', marginTop: '-3rem', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', padding: '4rem 1rem 1rem 1rem' }}>
+            <div style={{ backgroundColor: '#101E45', borderRadius: '1rem', width: '280px', height: '300px', marginTop: '-2.5rem', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', padding: '4rem 1rem 1rem 1rem', position: 'relative', zIndex: 10 }}>
+              <Image
+                src="/assets/explanation-orpheus.svg"
+                alt="Orpheus"
+                width={180}
+                height={180}
+                style={{ position: 'absolute', bottom: '-4.5rem', left: '-3rem', zIndex: 10 }}
+              />
               <p style={{ color: 'white', textAlign: 'center', margin: 0, fontSize: '2rem', lineHeight: '1.2' }}>Go wild with building any game! Devlog in Slack, use Hackatime, and push to Github.</p>
             </div>
+            <Image
+              src="/assets/zorp.svg"
+              alt="Zorp"
+              width={180}
+              height={180}
+              style={{ position: 'absolute', bottom: '-4rem', right: '-7rem', zIndex: 100 }}
+            />
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative' }}>
-            <div style={{ position: 'relative' }}>
+            <div style={{ position: 'relative', zIndex: 20 }}>
               <Image
                 src="/assets/exxplanation-title2-2.svg"
                 alt="Title 2"
                 width={400}
                 height={120}
               />
-              <div style={{ position: 'absolute', top: '50%', left: '35%', transform: 'translateY(-50%)', textAlign: 'left', zIndex: 10, pointerEvents: 'none' }}>
+              <div style={{ position: 'absolute', top: '50%', left: '35%', transform: 'translateY(-50%)', textAlign: 'left', zIndex: 21, pointerEvents: 'none' }}>
                 <span style={{ fontSize: '3.5rem', color: '#EE0073', fontWeight: 'bold', letterSpacing: '0.5rem' }}>PLAY</span>
               </div>
             </div>
-            <div style={{ backgroundColor: '#101E45', borderRadius: '1rem', width: '280px', height: '300px', marginTop: '-3rem', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', padding: '4rem 1rem 1rem 1rem' }}>
+            <div style={{ backgroundColor: '#101E45', borderRadius: '1rem', width: '280px', height: '300px', marginTop: '-2.5rem', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', padding: '4rem 1rem 1rem 1rem', position: 'relative', zIndex: 10 }}>
               <p style={{ color: 'white', textAlign: 'center', margin: 0, fontSize: '2rem', lineHeight: '1.2' }}>Participate in challenges, huddles, workshops, and showcases on Slack.</p>
             </div>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative' }}>
-            <div style={{ position: 'relative' }}>
+            <div style={{ position: 'relative', zIndex: 20 }}>
               <Image
                 src="/assets/exxplanation-title3-2.svg"
                 alt="Title 3"
                 width={400}
                 height={120}
               />
-              <div style={{ position: 'absolute', top: '50%', left: '35%', transform: 'translateY(-50%)', textAlign: 'left', zIndex: 10, pointerEvents: 'none' }}>
+              <div style={{ position: 'absolute', top: '50%', left: '35%', transform: 'translateY(-50%)', textAlign: 'left', zIndex: 21, pointerEvents: 'none' }}>
                 <span style={{ fontSize: '3.5rem', color: '#EE0073', fontWeight: 'bold', letterSpacing: '0.5rem' }}>SHIP</span>
               </div>
             </div>
-            <div style={{ backgroundColor: '#101E45', borderRadius: '1rem', width: '280px', height: '300px', marginTop: '-3rem', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', padding: '4rem 1rem 1rem 1rem' }}>
+            <div style={{ backgroundColor: '#101E45', borderRadius: '1rem', width: '280px', height: '300px', marginTop: '-2.5rem', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', padding: '4rem 1rem 1rem 1rem', position: 'relative', zIndex: 10 }}>
+              <Image
+                src="/assets/explanation-coin.svg"
+                alt="Coin"
+                width={180}
+                height={180}
+                style={{ position: 'absolute', bottom: '-4.5rem', left: '-4rem', zIndex: 10 }}
+              />
               <p style={{ color: 'white', textAlign: 'center', margin: 0, fontSize: '2rem', lineHeight: '1.2' }}>Upload to Itch.io, record a gameplay video, ship in Slack, then submit to the form.</p>
             </div>
+            <Image
+              src="/assets/explanation-heidi.svg"
+              alt="Heidi"
+              width={180}
+              height={180}
+              style={{ position: 'absolute', bottom: '-4rem', right: '-8rem', zIndex: 100 }}
+            />
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative' }}>
-            <div style={{ position: 'relative' }}>
+            <div style={{ position: 'relative', zIndex: 20 }}>
               <Image
                 src="/assets/exxplanation-title4-2.svg"
                 alt="Title 4"
                 width={400}
                 height={120}
               />
-              <div style={{ position: 'absolute', top: '50%', left: '35%', transform: 'translateY(-50%)', textAlign: 'left', zIndex: 10, pointerEvents: 'none' }}>
+              <div style={{ position: 'absolute', top: '50%', left: '35%', transform: 'translateY(-50%)', textAlign: 'left', zIndex: 21, pointerEvents: 'none' }}>
                 <span style={{ fontSize: '3.5rem', color: '#EE0073', fontWeight: 'bold', letterSpacing: '0.5rem' }}>EARN</span>
               </div>
             </div>
-            <div style={{ backgroundColor: '#101E45', borderRadius: '1rem', width: '280px', height: '300px', marginTop: '-3rem', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', padding: '4rem 1rem 1rem 1rem' }}>
+            <div style={{ backgroundColor: '#101E45', borderRadius: '1rem', width: '280px', height: '300px', marginTop: '-2.5rem', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', padding: '4rem 1rem 1rem 1rem', position: 'relative', zIndex: 10 }}>
+              <Image
+                src="/assets/explanation-arcade2.svg"
+                alt="Arcade 2"
+                width={180}
+                height={180}
+                style={{ position: 'absolute', bottom: '-5rem', right: '-4rem', zIndex: 10 }}
+              />
               <p style={{ color: 'white', textAlign: 'center', margin: 0, fontSize: '2rem', lineHeight: '1.2' }}>Earn a grant to buy prizes (ex. game consoles, Steam credit, an arcade kit)</p>
             </div>
           </div>
@@ -461,38 +552,73 @@ export default function Explanation() {
             msOverflowStyle: 'none'
           } as React.CSSProperties}
         >
-          {/* Render games three times for seamless infinite loop */}
           {[...games, ...games, ...games].map((game, index) => (
-            <div key={`${game.title}-${index}`} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '380px', flexShrink: 0, border: '2px solid white', borderRadius: '1rem', padding: '1.5rem' }}>
-              <h3 style={{ color: 'white', fontSize: '2.5rem', marginBottom: '1rem', textAlign: 'center', wordWrap: 'break-word' }}>{game.title}</h3>
+            <div key={`${game.title}-${index}`} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '380px', flexShrink: 0, border: '2px solid white', borderRadius: '1rem', padding: '0.75rem' }}>
+              <h3 style={{ color: 'white', fontSize: '3rem', marginBottom: '0.5rem', textAlign: 'center', wordWrap: 'break-word' }}>{game.title}</h3>
               <Image
                 src={game.image}
                 alt={game.alt}
                 width={320}
                 height={250}
-                style={{ marginBottom: '1rem', borderRadius: '0.5rem', width: '320px', height: '250px', objectFit: 'cover' }}
+                style={{ marginBottom: '0.5rem', borderRadius: '0.5rem', width: '320px', height: '250px', objectFit: 'cover' }}
               />
-              <p style={{ color: 'white', fontSize: '1.6rem', textAlign: 'center', marginBottom: '0.5rem', wordWrap: 'break-word' }}>{game.creator}</p>
-              <p style={{ color: 'white', fontSize: '1.4rem', textAlign: 'center', marginBottom: '1rem', wordWrap: 'break-word' }}>{game.description}</p>
+              <p style={{ color: 'white', fontSize: '1.8rem', textAlign: 'center', marginBottom: '0.25rem', wordWrap: 'break-word' }}>{game.creator}</p>
+              <p style={{ color: 'white', fontSize: '1.6rem', textAlign: 'center', marginBottom: '0.5rem', wordWrap: 'break-word' }}>{game.description}</p>
               <a
                 href={game.link}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
-                  backgroundColor: '#EE0073',
+                  backgroundColor: '#EE00A7',
                   color: 'white',
                   padding: '0.75rem 1.5rem',
                   borderRadius: '0.5rem',
                   textDecoration: 'none',
-                  fontSize: '1.8rem',
+                  fontSize: '2rem',
                   fontWeight: 'bold',
-                  marginTop: 'auto'
+                  marginTop: 'auto',
+                  marginBottom: '1rem',
+                  boxShadow: '-8px 8px 0 #930B6A'
                 }}
               >
                 PLAY HERE
               </a>
             </div>
           ))}
+        </div>
+
+        <div style={{ backgroundColor: '#224CCA', padding: '3rem', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '2rem' }}>
+          <Image
+            src="/assets/past-orpheusunity.svg"
+            alt="Orpheus Unity"
+            width={200}
+            height={200}
+          />
+          <a
+            href="http://v2.jumpstart.hackclub.com/games/index.html"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              backgroundColor: '#EE00A7',
+              color: 'white',
+              padding: '1rem 2rem',
+              borderRadius: '0.5rem',
+              textDecoration: 'none',
+              fontSize: '3rem',
+              fontWeight: 'bold',
+              textAlign: 'center',
+              letterSpacing: '0.1em',
+              boxShadow: '-8px 8px 0 #930B6A'
+            }}
+          >
+            SEE ALL V2 GAMES
+          </a>
+          <Image
+            src="/assets/past-orpheusconsole.svg"
+            alt="Orpheus Console"
+            width={200}
+            height={200}
+          />
         </div>
       </div>
     </section>

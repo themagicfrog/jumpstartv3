@@ -3,6 +3,13 @@
 import Image from 'next/image';
 
 export default function Header() {
+  const handleScrollDown = () => {
+    window.scrollTo({
+      top: window.innerHeight,
+      behavior: 'smooth'
+    });
+  };
+
   return (
     <section style={{ position: 'relative' }}>
       <div style={{ position: 'absolute', top: '1rem', left: '0' }}>
@@ -23,17 +30,21 @@ export default function Header() {
             height={300}
             style={{ marginTop: '10rem' }}
           />
-          <div style={{ position: 'relative' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <Image
               src="/assets/title.svg"
               alt="Jumpstart v3"
               width={1200}
               height={300}
+              style={{ width: '100%', maxWidth: '1200px', height: 'auto' }}
             />
-            <div style={{ position: 'absolute', bottom: '-6rem', left: '50%', transform: 'translateX(-50%)', textAlign: 'center', width: '100%' }}>
-              <p style={{ fontSize: '2.75rem', margin: '0', lineHeight: '1' }}>BUILD GAMES, EARN PRIZES</p>
-              <p style={{ fontSize: '2.75rem', margin: '0', lineHeight: '1', marginTop: '-0.5rem' }}>Jan 1 - Feb 1</p>
-              <div style={{ display: 'flex', justifyContent: 'center', marginTop: '1.5rem', marginBottom: '3rem' }}>
+            <div style={{ textAlign: 'center', width: '100%', marginTop: '-4rem' }}>
+              <p style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', margin: '0', lineHeight: '1' }}>BUILD GAMES, EARN PRIZES</p>
+              <p style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', margin: '0', lineHeight: '1', marginTop: '-0.5rem' }}>Jan 1 - Feb 1</p>
+              <div 
+                style={{ display: 'flex', justifyContent: 'center', marginTop: '1.5rem', marginBottom: '3rem', cursor: 'pointer' }}
+                onClick={handleScrollDown}
+              >
                 <Image
                   src="/assets/triangle.svg"
                   alt="Triangle"
