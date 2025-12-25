@@ -83,11 +83,12 @@ export default function Explanation() {
       {showHeader && (
         <div style={{ 
           backgroundColor: '#224CCA', 
-          padding: '2rem',
+          padding: '1rem 2rem',
           marginTop: '2rem',
-          marginBottom: '2rem'
+          marginBottom: '0',
+          paddingBottom: '0.5rem'
         }}>
-          <h2 style={{ textAlign: 'center', color: 'white', margin: 0, fontSize: '3.5rem' }}>{section.title}</h2>
+          <h2 style={{ textAlign: 'center', color: 'white', margin: 0, fontSize: '5rem' }}>{section.title}</h2>
         </div>
       )}
       {!showHeader && <h2 style={{ textAlign: 'center' }}>{section.title}</h2>}
@@ -168,6 +169,126 @@ export default function Explanation() {
         </div>
 
         {renderSection(beginnerSection, 'beginner', true)}
+        
+        <div style={{ backgroundColor: '#224CCA', display: 'flex', justifyContent: 'center', gap: '3rem', padding: '0rem 8rem 2rem 8rem', marginTop: '0' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative' }}>
+            <div style={{ position: 'relative' }}>
+              <Image
+                src="/assets/explanation-title1.svg"
+                alt="Title 1"
+                width={400}
+                height={120}
+              />
+              <div style={{ position: 'absolute', top: '50%', left: '35%', transform: 'translateY(-50%)', textAlign: 'left', zIndex: 10, pointerEvents: 'none' }}>
+                <span style={{ fontSize: '3.5rem', color: '#EE0073', fontWeight: 'bold', letterSpacing: '0.5rem' }}>BUILD</span>
+              </div>
+            </div>
+            <div style={{ backgroundColor: '#101E45', borderRadius: '1rem', width: '325px', height: '300px', marginTop: '-3rem', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', padding: '4rem 1rem 1rem 1rem' }}>
+              <p style={{ color: 'white', textAlign: 'center', margin: 0, fontSize: '2rem', lineHeight: '1.2' }}>Use our beginner-friendly resources to make your own 2D platformer game.</p>
+            </div>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative' }}>
+            <div style={{ position: 'relative' }}>
+              <Image
+                src="/assets/explanation-title2.svg"
+                alt="Title 2"
+                width={400}
+                height={120}
+              />
+              <div style={{ position: 'absolute', top: '50%', left: '35%', transform: 'translateY(-50%)', textAlign: 'left', zIndex: 10, pointerEvents: 'none' }}>
+                <span style={{ fontSize: '3.5rem', color: '#EE0073', fontWeight: 'bold', letterSpacing: '0.5rem' }}>SHIP</span>
+              </div>
+            </div>
+            <div style={{ backgroundColor: '#101E45', borderRadius: '1rem', width: '325px', height: '300px', marginTop: '-3rem', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', padding: '4rem 1rem 1rem 1rem' }}>
+              <p style={{ color: 'white', textAlign: 'center', margin: 0, fontSize: '2rem', lineHeight: '1.2' }}>Upload your game to Itch.io and Github, then submit to the form.</p>
+            </div>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative' }}>
+            <div style={{ position: 'relative' }}>
+              <Image
+                src="/assets/explanation-title3.svg"
+                alt="Title 3"
+                width={400}
+                height={120}
+              />
+              <div style={{ position: 'absolute', top: '50%', left: '35%', transform: 'translateY(-50%)', textAlign: 'left', zIndex: 10, pointerEvents: 'none' }}>
+                <span style={{ fontSize: '3.5rem', color: '#EE0073', fontWeight: 'bold', letterSpacing: '0.5rem' }}>EARN</span>
+              </div>
+            </div>
+            <div style={{ backgroundColor: '#101E45', borderRadius: '1rem', width: '325px', height: '300px', marginTop: '-3rem', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', padding: '4rem 1rem 1rem 1rem' }}>
+              <p style={{ color: 'white', textAlign: 'center', margin: 0, fontSize: '2rem', lineHeight: '1.2' }}>Earn a stickersheet and a grant to buy a game to play. Enjoy!</p>
+            </div>
+          </div>
+        </div>
+
+        {renderSection(experiencedSection, 'experienced', true)}
+        
+        <div style={{ backgroundColor: '#224CCA', display: 'flex', justifyContent: 'center', gap: '3rem', padding: '0rem 8rem 2rem 8rem', marginTop: '0' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative' }}>
+            <div style={{ position: 'relative' }}>
+              <Image
+                src="/assets/exxplanation-title1-2.svg"
+                alt="Title 1"
+                width={400}
+                height={120}
+              />
+              <div style={{ position: 'absolute', top: '50%', left: '35%', transform: 'translateY(-50%)', textAlign: 'left', zIndex: 10, pointerEvents: 'none' }}>
+                <span style={{ fontSize: '3.5rem', color: '#EE0073', fontWeight: 'bold', letterSpacing: '0.5rem' }}>BUILD</span>
+              </div>
+            </div>
+            <div style={{ backgroundColor: '#101E45', borderRadius: '1rem', width: '280px', height: '300px', marginTop: '-3rem', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', padding: '4rem 1rem 1rem 1rem' }}>
+              <p style={{ color: 'white', textAlign: 'center', margin: 0, fontSize: '2rem', lineHeight: '1.2' }}>Go wild with building any game! Devlog in Slack, use Hackatime, and push to Github.</p>
+            </div>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative' }}>
+            <div style={{ position: 'relative' }}>
+              <Image
+                src="/assets/exxplanation-title2-2.svg"
+                alt="Title 2"
+                width={400}
+                height={120}
+              />
+              <div style={{ position: 'absolute', top: '50%', left: '35%', transform: 'translateY(-50%)', textAlign: 'left', zIndex: 10, pointerEvents: 'none' }}>
+                <span style={{ fontSize: '3.5rem', color: '#EE0073', fontWeight: 'bold', letterSpacing: '0.5rem' }}>PLAY</span>
+              </div>
+            </div>
+            <div style={{ backgroundColor: '#101E45', borderRadius: '1rem', width: '280px', height: '300px', marginTop: '-3rem', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', padding: '4rem 1rem 1rem 1rem' }}>
+              <p style={{ color: 'white', textAlign: 'center', margin: 0, fontSize: '2rem', lineHeight: '1.2' }}>Participate in challenges, huddles, workshops, and showcases on Slack.</p>
+            </div>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative' }}>
+            <div style={{ position: 'relative' }}>
+              <Image
+                src="/assets/exxplanation-title3-2.svg"
+                alt="Title 3"
+                width={400}
+                height={120}
+              />
+              <div style={{ position: 'absolute', top: '50%', left: '35%', transform: 'translateY(-50%)', textAlign: 'left', zIndex: 10, pointerEvents: 'none' }}>
+                <span style={{ fontSize: '3.5rem', color: '#EE0073', fontWeight: 'bold', letterSpacing: '0.5rem' }}>SHIP</span>
+              </div>
+            </div>
+            <div style={{ backgroundColor: '#101E45', borderRadius: '1rem', width: '280px', height: '300px', marginTop: '-3rem', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', padding: '4rem 1rem 1rem 1rem' }}>
+              <p style={{ color: 'white', textAlign: 'center', margin: 0, fontSize: '2rem', lineHeight: '1.2' }}>Upload to Itch.io, record a gameplay video, ship in Slack, then submit to the form.</p>
+            </div>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative' }}>
+            <div style={{ position: 'relative' }}>
+              <Image
+                src="/assets/exxplanation-title4-2.svg"
+                alt="Title 4"
+                width={400}
+                height={120}
+              />
+              <div style={{ position: 'absolute', top: '50%', left: '35%', transform: 'translateY(-50%)', textAlign: 'left', zIndex: 10, pointerEvents: 'none' }}>
+                <span style={{ fontSize: '3.5rem', color: '#EE0073', fontWeight: 'bold', letterSpacing: '0.5rem' }}>EARN</span>
+              </div>
+            </div>
+            <div style={{ backgroundColor: '#101E45', borderRadius: '1rem', width: '280px', height: '300px', marginTop: '-3rem', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', padding: '4rem 1rem 1rem 1rem' }}>
+              <p style={{ color: 'white', textAlign: 'center', margin: 0, fontSize: '2rem', lineHeight: '1.2' }}>Earn a grant to buy prizes (ex. game consoles, Steam credit, an arcade kit)</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

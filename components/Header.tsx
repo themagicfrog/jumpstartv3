@@ -27,8 +27,8 @@ export default function Header() {
             <Image
               src="/assets/title.svg"
               alt="Jumpstart v3"
-              width={800}
-              height={200}
+              width={1200}
+              height={300}
             />
             <div style={{ position: 'absolute', bottom: '-6rem', left: '50%', transform: 'translateX(-50%)', textAlign: 'center', width: '100%' }}>
               <p style={{ fontSize: '2.75rem', margin: '0', lineHeight: '1' }}>BUILD GAMES, EARN PRIZES</p>
