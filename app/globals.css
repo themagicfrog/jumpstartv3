@@ -6,7 +6,7 @@
   font-weight: normal;
   font-style: normal;
   font-display: swap;
-  }
+}
 
 html,
 body {
@@ -27,4 +27,180 @@ h1, h2, h3, h4, h5, h6, p {
 
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
+}
+
+.pink-button {
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.pink-button:hover {
+  background-color: #FF1AB8 !important;
+  transform: scale(1.05);
+}
+
+@keyframes column-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.step-column {
+  cursor: pointer;
+  animation: column-float 4s ease-in-out infinite !important;
+  will-change: transform;
+}
+
+.step-column:nth-child(1) { animation-delay: 0s !important; }
+.step-column:nth-child(2) { animation-delay: 0.5s !important; }
+.step-column:nth-child(3) { animation-delay: 1s !important; }
+.step-column:nth-child(4) { animation-delay: 1.5s !important; }
+
+.step-column:hover {
+  animation-play-state: paused;
+}
+
+.step-title-image,
+.step-title-text-wrapper,
+.step-rectangle,
+.step-decoration-image {
+  transition: transform 0.3s ease !important;
+  transform-origin: center center;
+}
+
+.step-rectangle-text,
+.step-title-text {
+  transition: font-size 0.3s ease !important;
+}
+
+.step-column:hover .step-title-image {
+  transform: scale(1.1) !important;
+}
+
+.step-column:hover .step-title-text-wrapper {
+  transform: translateY(-50%) scale(1.1) !important;
+}
+
+.step-column:hover .step-title-text {
+  font-size: 3.55rem !important;
+}
+
+.step-column:hover .step-rectangle {
+  transform: scale(1.08) !important;
+}
+
+.step-column:hover .step-rectangle-text {
+  font-size: 2.02rem !important;
+}
+
+.step-column:hover .step-decoration-image {
+  transform: scale(1.15) !important;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-10px) scale(1); }
+}
+
+.title-float {
+  animation: float 3s ease-in-out infinite;
+  transition: transform 0.4s ease-in-out;
+  transform-origin: center center;
+}
+
+.title-float:hover {
+  animation: none;
+  transform: translateY(-5px) scale(1.05) !important;
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-3deg); }
+  75% { transform: rotate(3deg); }
+}
+
+@keyframes wiggle-hover {
+  0%, 100% { transform: rotate(0deg) scale(1.1); }
+  25% { transform: rotate(-3deg) scale(1.1); }
+  75% { transform: rotate(3deg) scale(1.1); }
+}
+
+.header-character {
+  animation: wiggle 2s ease-in-out infinite;
+  transform-origin: center center;
+  cursor: pointer;
+  will-change: transform;
+}
+
+.header-character:hover {
+  animation: wiggle-hover 0.8s ease-in-out infinite !important;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.triangle-bounce {
+  animation: bounce 1.5s ease-in-out infinite;
+}
+
+.section-title-box {
+  transition: transform 0.3s ease !important;
+  transform-origin: center center;
+  cursor: pointer;
+}
+
+.section-title-box:hover {
+  transform: scale(1.03) !important;
+}
+
+.section-title-text {
+  transition: font-size 0.3s ease !important;
+}
+
+.section-title-box:hover .section-title-text {
+  font-size: 4.3rem !important;
+}
+
+.hackclub-link {
+  display: inline-block;
+  transition: transform 0.3s ease;
+  transform-origin: center center;
+  cursor: pointer;
+}
+
+.hackclub-link:hover {
+  transform: scale(1.1) !important;
+}
+
+.hackclub-link img {
+  display: block;
+  pointer-events: none;
+}
+
+.game-card {
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.game-card:hover {
+  transform: scale(1.05);
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  .hide-mobile {
+    display: none !important;
+  }
+
+  .steps-container {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 2rem !important;
+    padding: 2rem 1rem !important;
+  }
+
+  .steps-container .step-column {
+    width: 100%;
+    max-width: 400px;
+  }
 }
