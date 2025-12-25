@@ -12,6 +12,6 @@ export default function Home() {
       <PastGames />
       <Start />
       <Footer />
-    </main>
+      </main>
   );
 }
