@@ -186,21 +186,80 @@ h1, h2, h3, h4, h5, h6, p {
   transform: scale(1.05);
 }
 
-/* Mobile Responsive Styles */
 @media (max-width: 768px) {
   .hide-mobile {
     display: none !important;
   }
 
+  .header-content {
+    padding-top: 6rem !important;
+  }
+
+  .header-title-container {
+    margin-top: 2rem !important;
+  }
+
+  .header-text-container {
+    margin-top: -2rem !important;
+  }
+
+  .header-triangle-container {
+    margin-top: 3rem !important;
+  }
+
+  .section-title-text {
+    font-size: 2rem !important;
+  }
+
+  .section-title-box {
+    min-width: auto !important;
+    padding: 0.5rem 1rem !important;
+  }
+
+  h2 {
+    font-size: 2.5rem !important;
+  }
+
   .steps-container {
     flex-direction: column !important;
     align-items: center !important;
-    gap: 2rem !important;
+    gap: 4rem !important;
     padding: 2rem 1rem !important;
   }
 
   .steps-container .step-column {
     width: 100%;
     max-width: 400px;
+  }
+
+  .mobile-experience-image {
+    right: -4rem !important;
+  }
+
+  .past-description {
+    padding: 1.5rem 1rem !important;
+  }
+
+  .past-description p {
+    font-size: 1.5rem !important;
+  }
+
+  .see-all-button {
+    font-size: 1.8rem !important;
+    padding: 0.75rem 1rem !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+  }
+
+  .start-section {
+    padding: 2rem 1rem !important;
+  }
+
+  .start-title {
+    font-size: 2.5rem !important;
+  }
+
+  .start-button-container {
+    margin-top: 2rem !important;
   }
 }

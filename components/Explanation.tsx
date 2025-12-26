@@ -162,7 +162,7 @@ const StepColumn = ({ step, index, isBeginner, decorations = [], rectangleWidth 
           alt="Zorp"
           width={180}
           height={180}
-          className="step-decoration-image"
+          className="step-decoration-image mobile-experience-image"
           style={{ position: 'absolute', bottom: '-4rem', right: '-7rem', zIndex: 300, pointerEvents: 'none' }}
         />
       )}
@@ -172,7 +172,7 @@ const StepColumn = ({ step, index, isBeginner, decorations = [], rectangleWidth 
           alt="Heidi"
           width={180}
           height={180}
-          className="step-decoration-image"
+          className="step-decoration-image mobile-experience-image"
           style={{ position: 'absolute', bottom: '-4rem', right: '-8rem', zIndex: 300, pointerEvents: 'none' }}
         />
       )}
@@ -317,7 +317,7 @@ export default function Explanation() {
           alt="Stars"
           width={150}
           height={150}
-          className="header-character"
+          className="header-character hide-mobile"
           style={{ position: 'absolute', left: '2rem', top: '-1rem' }}
         />
       )}
@@ -333,7 +333,7 @@ export default function Explanation() {
           <div className="section-title-box" style={sectionTitleBoxStyle}>
             <h2 className="section-title-text" style={sectionTitleTextStyle}>HOW DOES THIS WORK?</h2>
           </div>
-          <Image src="/assets/explanation-arcade1.svg" alt="Arcade" width={200} height={200} className="header-character" />
+          <Image src="/assets/explanation-arcade1.svg" alt="Arcade" width={200} height={200} className="header-character hide-mobile" />
         </div>
 
         {renderSectionHeader(beginnerSection)}
@@ -374,7 +374,7 @@ export default function Explanation() {
           <Image src="/assets/explanation-stars2.svg" alt="Stars 2" width={200} height={200} className="header-character" />
         </div>
 
-        <div style={{ backgroundColor: '#224CCA', padding: '2rem 6rem', marginTop: '1rem', marginBottom: '0' }}>
+        <div className="past-description" style={{ backgroundColor: '#224CCA', padding: '2rem 6rem', marginTop: '1rem', marginBottom: '0' }}>
           <p style={{ color: 'white', textAlign: 'center', margin: 0, fontSize: '2.5rem' }}>
             Jumpstart V2 ran from July 9th to August 10th, receiving 68 games from 26 different countries, and over a total of 1900 hours! Some include:
           </p>
@@ -414,7 +414,7 @@ export default function Explanation() {
             href="http://v2.jumpstart.hackclub.com/games/index.html"
             target="_blank"
             rel="noopener noreferrer"
-            className="pink-button"
+            className="pink-button see-all-button"
             style={{ ...buttonStyle, padding: '0.75rem 1.5rem', fontSize: '2.5rem', letterSpacing: '0.1em', marginTop: '0.5rem' }}
           >
             SEE ALL V2 GAMES

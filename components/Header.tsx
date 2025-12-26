@@ -21,7 +21,7 @@ export default function Header() {
         </a>
       </div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', paddingTop: '4rem', paddingBottom: '2rem' }}>
+      <div className="header-content" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', paddingTop: '4rem', paddingBottom: '2rem' }}>
         <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'center', gap: '0rem', position: 'relative' }}>
           <Image
             src="/assets/header-heidi.svg"
@@ -32,7 +32,7 @@ export default function Header() {
             style={{ marginTop: '10rem', marginRight: '-4rem' }}
           />
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <div className="title-float" style={{ display: 'inline-block' }}>
+            <div className="title-float header-title-container" style={{ display: 'inline-block' }}>
               <Image
                 src="/assets/title.svg"
                 alt="Jumpstart v3"
@@ -41,10 +41,10 @@ export default function Header() {
                 style={{ width: '100%', maxWidth: '1200px', height: 'auto', cursor: 'pointer', display: 'block' }}
               />
             </div>
-            <div style={{ textAlign: 'center', width: '100%', marginTop: '-4rem' }}>
+            <div className="header-text-container" style={{ textAlign: 'center', width: '100%', marginTop: '-4rem' }}>
               <p style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', margin: '0', lineHeight: '1' }}>BUILD GAMES, EARN PRIZES</p>
               <p style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', margin: '0', lineHeight: '1', marginTop: '-0.5rem' }}>Jan 1 - Feb 1</p>
-              <div style={{ display: 'flex', justifyContent: 'center', marginTop: '2.5rem', marginBottom: '3rem' }}>
+              <div className="header-triangle-container" style={{ display: 'flex', justifyContent: 'center', marginTop: '2.5rem', marginBottom: '3rem' }}>
                 <Image
                   src="/assets/triangle.svg"
                   alt="Triangle"
