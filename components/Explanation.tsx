@@ -382,13 +382,13 @@ export default function Explanation() {
 
         <div style={{ backgroundColor: '#224CCA', height: '2rem', width: '100%' }}></div>
 
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', padding: '0.5rem 3rem', marginTop: '3rem' }}>
+        <div className="section-title-container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', padding: '0.5rem 3rem', marginTop: '3rem' }}>
           <Image src="/assets/explanation-diamond.svg" alt="Diamond" width={200} height={200} className="header-character hide-mobile" />
           <div className="section-title-box" style={sectionTitleBoxStyle}>
             <h2 className="section-title-text" style={{ ...sectionTitleTextStyle, lineHeight: '0.9', whiteSpace: 'normal' }}>
               JUMPSTART V3 IS NOW OPEN FOR<br />
               <span className="you-wiggle" style={{ fontSize: '2.8em' }}>YOU</span><br />
-              TO BUILD A GAME!
+              TO BUILD A GAME OF YOUR OWN!
             </h2>
           </div>
           <Image src="/assets/explanation-arcade1.svg" alt="Arcade" width={200} height={200} className="header-character hide-mobile" />
