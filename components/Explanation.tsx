@@ -329,7 +329,7 @@ export default function Explanation() {
     <section>
       <div>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', padding: '0.5rem 3rem' }}>
-          <Image src="/assets/explanation-diamond.svg" alt="Diamond" width={200} height={200} className="header-character" />
+          <Image src="/assets/explanation-diamond.svg" alt="Diamond" width={200} height={200} className="header-character hide-mobile" />
           <div className="section-title-box" style={sectionTitleBoxStyle}>
             <h2 className="section-title-text" style={sectionTitleTextStyle}>HOW DOES THIS WORK?</h2>
           </div>
@@ -408,7 +408,7 @@ export default function Explanation() {
           ))}
         </div>
 
-        <div style={{ backgroundColor: '#101E45', padding: '0rem 3rem 3rem', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '2rem' }}>
+        <div className="see-all-button-container" style={{ backgroundColor: '#101E45', padding: '0rem 3rem 3rem', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '2rem' }}>
           <Image src="/assets/past-orpheusunity.svg" alt="Orpheus Unity" width={200} height={200} className="header-character hide-mobile" />
           <a
             href="http://v2.jumpstart.hackclub.com/games/index.html"
