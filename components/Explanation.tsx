@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import Image from 'next/image';
 
 interface Step {
@@ -210,7 +210,7 @@ const experiencedDecorations: Record<string, DecorationImage[]> = {
 const sectionTitleBoxStyle = {
   backgroundColor: 'white',
   borderRadius: '2rem',
-  padding: '0.5rem 1rem',
+  padding: '2rem 1rem',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
@@ -276,7 +276,7 @@ export default function Explanation() {
         if (!isPausedRef.current && carousel) {
           carousel.scrollLeft -= 1;
         }
-      }, 30);
+      }, 15);
     };
 
     const handleMouseEnter = () => { isPausedRef.current = true; };
@@ -328,10 +328,68 @@ export default function Explanation() {
   return (
     <section>
       <div>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', padding: '0.5rem 3rem' }}>
+        <div className="past-description" style={{ backgroundColor: '#224CCA', padding: '2rem 3rem', marginTop: '1rem', marginBottom: '0', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '2rem' }}>
+          <Image src="/assets/past-orpheusunity.svg" alt="Orpheus Unity" width={200} height={200} className="header-character hide-mobile" />
+          <p style={{ color: 'white', textAlign: 'center', margin: 0, fontSize: '3.5rem' }}>
+            Last summer, Jumpstart opened and received 68 games from 26 different countries, totalling 1900 hours of coding. Some include:
+          </p>
+          <Image src="/assets/past-orpheusconsole.svg" alt="Orpheus Console" width={200} height={200} className="header-character hide-mobile" />
+        </div>
+
+        <div 
+          ref={carouselRef}
+          className="hide-scrollbar"
+          style={{ 
+            display: 'flex', 
+            gap: '2rem', 
+            padding: '2rem 4rem 3rem 4rem',
+            backgroundColor: '#101E45',
+            overflowX: 'auto',
+            scrollBehavior: 'auto',
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none',
+            marginTop: '0'
+          } as React.CSSProperties}
+        >
+          {[...games, ...games, ...games].map((game, index) => {
+            const setIndex = Math.floor(index / games.length);
+            const isLastInSet = (index + 1) % games.length === 0;
+            
+            return (
+              <React.Fragment key={`${game.title}-${index}`}>
+                <div className="game-card" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '380px', flexShrink: 0, border: '2px solid white', borderRadius: '1rem', padding: '0.75rem' }}>
+                  <h3 style={{ color: 'white', fontSize: '3rem', marginBottom: '0.5rem', textAlign: 'center', wordWrap: 'break-word' }}>{game.title}</h3>
+                  <Image src={game.image} alt={game.alt} width={320} height={150} unoptimized={game.image.endsWith('.gif')} style={{ marginBottom: '0.5rem', borderRadius: '0.5rem', width: '320px', height: '180px', objectFit: 'cover' }} />
+                  <p style={{ color: 'white', fontSize: '1.8rem', textAlign: 'center', marginBottom: '0.25rem', wordWrap: 'break-word' }}>{game.creator}</p>
+                  <p style={{ color: 'white', fontSize: '1.6rem', textAlign: 'center', marginBottom: '0.5rem', wordWrap: 'break-word' }}>{game.description}</p>
+                  <a href={game.link} target="_blank" rel="noopener noreferrer" className="pink-button" style={buttonStyle}>
+                    PLAY HERE
+                  </a>
+                </div>
+                {isLastInSet && (
+                  <div key={`all-games-${setIndex}`} className="game-card" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '380px', flexShrink: 0, border: '2px solid white', borderRadius: '1rem', padding: '0.75rem', minHeight: '600px' }}>
+                    <h3 style={{ color: 'white', fontSize: '3rem', marginBottom: '0.5rem', textAlign: 'center', wordWrap: 'break-word' }}>ALL GAMES</h3>
+                    <Image src="/assets/v2gamse.gif" alt="V2 Games" width={320} height={250} unoptimized={true} style={{ marginBottom: '0.5rem', borderRadius: '0.5rem', width: '320px', height: '250px', objectFit: 'cover' }} />
+                    <a href="http://v2.jumpstart.hackclub.com/games/index.html" target="_blank" rel="noopener noreferrer" className="pink-button" style={{ ...buttonStyle, width: 'auto', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2.5rem', padding: '1rem 4rem', marginTop: 'auto', marginBottom: '2rem' }}>
+                      PLAY HERE
+                    </a>
+                  </div>
+                )}
+              </React.Fragment>
+            );
+          })}
+        </div>
+
+        <div style={{ backgroundColor: '#224CCA', height: '2rem', width: '100%' }}></div>
+
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', padding: '0.5rem 3rem', marginTop: '3rem' }}>
           <Image src="/assets/explanation-diamond.svg" alt="Diamond" width={200} height={200} className="header-character hide-mobile" />
           <div className="section-title-box" style={sectionTitleBoxStyle}>
-            <h2 className="section-title-text" style={sectionTitleTextStyle}>HOW DOES THIS WORK?</h2>
+            <h2 className="section-title-text" style={{ ...sectionTitleTextStyle, lineHeight: '0.9', whiteSpace: 'normal' }}>
+              JUMPSTART V3 IS NOW OPEN FOR<br />
+              <span className="you-wiggle" style={{ fontSize: '2.8em' }}>YOU</span><br />
+              TO BUILD A GAME!
+            </h2>
           </div>
           <Image src="/assets/explanation-arcade1.svg" alt="Arcade" width={200} height={200} className="header-character hide-mobile" />
         </div>
@@ -364,62 +422,6 @@ export default function Explanation() {
               rectangleWidth={280}
             />
           ))}
-        </div>
-
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', padding: '0.5rem 3rem' }}>
-          <Image src="/assets/explanation-stars1.svg" alt="Stars 1" width={200} height={200} className="header-character" />
-          <div className="section-title-box" style={sectionTitleBoxStyle}>
-            <h2 className="section-title-text" style={sectionTitleTextStyle}>JUMPSTART IN THE PAST</h2>
-          </div>
-          <Image src="/assets/explanation-stars2.svg" alt="Stars 2" width={200} height={200} className="header-character" />
-        </div>
-
-        <div className="past-description" style={{ backgroundColor: '#224CCA', padding: '2rem 6rem', marginTop: '1rem', marginBottom: '0' }}>
-          <p style={{ color: 'white', textAlign: 'center', margin: 0, fontSize: '2.5rem' }}>
-            Jumpstart V2 ran from July 9th to August 10th, receiving 68 games from 26 different countries, and over a total of 1900 hours! Some include:
-          </p>
-        </div>
-
-        <div 
-          ref={carouselRef}
-          className="hide-scrollbar"
-          style={{ 
-            display: 'flex', 
-            gap: '2rem', 
-            padding: '2rem 4rem 0rem 4rem',
-            backgroundColor: '#101E45',
-            overflowX: 'auto',
-            scrollBehavior: 'auto',
-            scrollbarWidth: 'none',
-            msOverflowStyle: 'none',
-            marginTop: '0'
-          } as React.CSSProperties}
-        >
-          {[...games, ...games, ...games].map((game, index) => (
-            <div key={`${game.title}-${index}`} className="game-card" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '380px', flexShrink: 0, border: '2px solid white', borderRadius: '1rem', padding: '0.75rem' }}>
-              <h3 style={{ color: 'white', fontSize: '3rem', marginBottom: '0.5rem', textAlign: 'center', wordWrap: 'break-word' }}>{game.title}</h3>
-              <Image src={game.image} alt={game.alt} width={320} height={250} style={{ marginBottom: '0.5rem', borderRadius: '0.5rem', width: '320px', height: '250px', objectFit: 'cover' }} />
-              <p style={{ color: 'white', fontSize: '1.8rem', textAlign: 'center', marginBottom: '0.25rem', wordWrap: 'break-word' }}>{game.creator}</p>
-              <p style={{ color: 'white', fontSize: '1.6rem', textAlign: 'center', marginBottom: '0.5rem', wordWrap: 'break-word' }}>{game.description}</p>
-              <a href={game.link} target="_blank" rel="noopener noreferrer" className="pink-button" style={buttonStyle}>
-                PLAY HERE
-              </a>
-            </div>
-          ))}
-        </div>
-
-        <div className="see-all-button-container" style={{ backgroundColor: '#101E45', padding: '0rem 3rem 3rem', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '2rem' }}>
-          <Image src="/assets/past-orpheusunity.svg" alt="Orpheus Unity" width={200} height={200} className="header-character hide-mobile" />
-          <a
-            href="http://v2.jumpstart.hackclub.com/games/index.html"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="pink-button see-all-button"
-            style={{ ...buttonStyle, padding: '0.75rem 1.5rem', fontSize: '2.5rem', letterSpacing: '0.1em', marginTop: '0.5rem' }}
-          >
-            SEE ALL V2 GAMES
-          </a>
-          <Image src="/assets/past-orpheusconsole.svg" alt="Orpheus Console" width={200} height={200} className="header-character hide-mobile" />
         </div>
       </div>
     </section>
