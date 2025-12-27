@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import Image from 'next/image';
 
 interface Step {
@@ -26,7 +26,7 @@ const beginnerSection: Section = {
     },
     {
       title: 'EARN',
-      description: 'Earn a stickersheet and a grant to buy a game to play. Enjoy!',
+      description: 'Once your game is reviewed, earn a $10 grant to buy a game to play. Enjoy!',
     },
   ],
 };
@@ -36,7 +36,7 @@ const experiencedSection: Section = {
   steps: [
     {
       title: 'BUILD',
-      description: 'Go wild with building any game! Devlog in Slack, use Hackatime, and push to Github.',
+      description: 'Go wild with building any game! Devlog in Slack, use Hackatime and Lapse, and push to Github.',
     },
     {
       title: 'PLAY',
@@ -122,11 +122,12 @@ interface StepColumnProps {
 }
 
 const StepColumn = ({ step, index, isBeginner, decorations = [], rectangleWidth }: StepColumnProps) => {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const titleImageSrc = isBeginner 
     ? `/assets/explanation-title${index + 1}.svg`
     : `/assets/exxplanation-title${index + 1}-2.svg`;
 
-  const columnZIndex = !isBeginner && (step.title === 'BUILD' || step.title === 'SHIP') ? 20 : 'auto';
+  const columnZIndex = !isBeginner && (step.title === 'BUILD' || step.title === 'SHIP') ? 20 : ((isBeginner && step.title === 'BUILD' && isDropdownOpen) || (!isBeginner && (step.title === 'BUILD' || step.title === 'PLAY') && isDropdownOpen) ? 10002 : 'auto');
   
   return (
     <div className="step-column" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative', zIndex: columnZIndex }}>
@@ -142,7 +143,7 @@ const StepColumn = ({ step, index, isBeginner, decorations = [], rectangleWidth 
           <span className="step-title-text" style={{ fontSize: '3.5rem', color: '#EE0073', fontWeight: 'bold', letterSpacing: '0.5rem' }}>{step.title}</span>
         </div>
       </div>
-      <div className="step-rectangle" style={{ backgroundColor: '#101E45', borderRadius: '1rem', width: `${rectangleWidth}px`, height: '300px', marginTop: '-2.5rem', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', padding: '4rem 1rem 1rem 1rem', position: 'relative', zIndex: 1 }}>
+      <div className="step-rectangle" style={{ backgroundColor: '#101E45', borderRadius: '1rem', width: `${rectangleWidth}px`, minHeight: '300px', marginTop: '-2.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', padding: '4rem 1rem 1rem 1rem', position: 'relative', zIndex: 1 }}>
         {decorations.map((decoration, i) => (
           <Image
             key={i}
@@ -154,7 +155,240 @@ const StepColumn = ({ step, index, isBeginner, decorations = [], rectangleWidth 
             style={{ position: 'absolute', ...decoration.position, zIndex: decoration.zIndex || 10 }}
           />
         ))}
-        <p className="step-rectangle-text" style={{ color: 'white', textAlign: 'center', margin: 0, fontSize: '2rem', lineHeight: '1.2' }}>{step.description}</p>
+        <p className="step-rectangle-text" style={{ color: 'white', textAlign: 'center', margin: 0, fontSize: '2rem', lineHeight: '1.2', marginBottom: (step.title === 'BUILD' && isBeginner) || (step.title === 'SHIP' && isBeginner) || (step.title === 'BUILD' && !isBeginner) || (step.title === 'PLAY' && !isBeginner) || (step.title === 'SHIP' && !isBeginner) ? '0.5rem' : '0' }}>{step.description}</p>
+        {step.title === 'SHIP' && isBeginner && (
+          <button
+            className="form-button"
+            style={{
+              backgroundColor: '#EE00A7',
+              color: 'white',
+              padding: '0.75rem 1.5rem',
+              borderRadius: '0.5rem',
+              fontSize: '1.8rem',
+              fontWeight: 'bold',
+              border: 'none',
+              cursor: 'pointer',
+              boxShadow: '-4px 4px 0 #930B6A',
+              transition: 'transform 0.2s ease',
+              zIndex: 10000,
+              display: 'inline-block',
+              marginTop: '0.5rem'
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+            onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+          >
+            FORM
+          </button>
+        )}
+        {step.title === 'BUILD' && isBeginner && (
+          <div 
+            style={{ position: 'relative', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '0.5rem', zIndex: 10000 }}
+            onMouseEnter={() => setIsDropdownOpen(true)}
+            onMouseLeave={() => setIsDropdownOpen(false)}
+          >
+            <button
+              className="details-dropdown-button"
+              style={{
+                backgroundColor: '#EE00A7',
+                color: 'white',
+                padding: '0.75rem 1.5rem',
+                borderRadius: '0.5rem',
+                fontSize: '1.8rem',
+                fontWeight: 'bold',
+                border: 'none',
+                cursor: 'pointer',
+                boxShadow: '-4px 4px 0 #930B6A',
+                transition: 'transform 0.2s ease',
+                zIndex: 10000,
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.5rem'
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+              onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+            >
+              RESOURCES
+              <Image 
+                src="/assets/triangle.svg" 
+                alt="Dropdown" 
+                width={16} 
+                height={16} 
+                style={{ 
+                  transform: isDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                  transition: 'transform 0.2s ease'
+                }} 
+              />
+            </button>
+            {isDropdownOpen && (
+              <div className="details-dropdown-content" style={{
+                position: 'absolute',
+                top: '100%',
+                marginTop: '0.5rem',
+                backgroundColor: 'white',
+                borderRadius: '0.5rem',
+                padding: '1rem',
+                width: '100%',
+                textAlign: 'center',
+                zIndex: 10001,
+                boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)'
+              }}>
+                <p style={{ color: '#142B70', fontSize: '1.6rem', margin: 0, lineHeight: '1.4' }}>
+                  Written, video, and slideshow guide{' '}
+                  <a 
+                    href="https://jams.hackclub.com/jam/godot-platformer" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    style={{ color: '#EE00A7', textDecoration: 'underline', fontWeight: 'bold' }}
+                  >
+                    HERE
+                  </a>
+                </p>
+              </div>
+            )}
+          </div>
+        )}
+        {step.title === 'BUILD' && !isBeginner && (
+          <div 
+            style={{ position: 'relative', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '0.5rem', zIndex: 10000 }}
+            onMouseEnter={() => setIsDropdownOpen(true)}
+            onMouseLeave={() => setIsDropdownOpen(false)}
+          >
+            <button
+              className="details-dropdown-button"
+              style={{
+                backgroundColor: '#EE00A7',
+                color: 'white',
+                padding: '0.75rem 1.5rem',
+                borderRadius: '0.5rem',
+                fontSize: '1.8rem',
+                fontWeight: 'bold',
+                border: 'none',
+                cursor: 'pointer',
+                boxShadow: '-4px 4px 0 #930B6A',
+                transition: 'transform 0.2s ease',
+                zIndex: 10000,
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.5rem'
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+              onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+            >
+              DETAILS
+              <Image 
+                src="/assets/triangle.svg" 
+                alt="Dropdown" 
+                width={16} 
+                height={16} 
+                style={{ 
+                  transform: isDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                  transition: 'transform 0.2s ease'
+                }} 
+              />
+            </button>
+            {isDropdownOpen && (
+              <div className="details-dropdown-content" style={{
+                position: 'absolute',
+                top: '100%',
+                marginTop: '0.5rem',
+                backgroundColor: 'white',
+                borderRadius: '0.5rem',
+                padding: '1rem',
+                width: '100%',
+                textAlign: 'center',
+                zIndex: 10001,
+                boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)'
+              }}>
+                <p style={{ color: '#142B70', fontSize: '1.6rem', margin: 0, lineHeight: '1.4' }}>
+                  Instructions in Slack here
+                </p>
+              </div>
+            )}
+          </div>
+        )}
+        {step.title === 'PLAY' && !isBeginner && (
+          <div 
+            style={{ position: 'relative', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '0.5rem', zIndex: 10000 }}
+            onMouseEnter={() => setIsDropdownOpen(true)}
+            onMouseLeave={() => setIsDropdownOpen(false)}
+          >
+            <button
+              className="details-dropdown-button"
+              style={{
+                backgroundColor: '#EE00A7',
+                color: 'white',
+                padding: '0.75rem 1.5rem',
+                borderRadius: '0.5rem',
+                fontSize: '1.8rem',
+                fontWeight: 'bold',
+                border: 'none',
+                cursor: 'pointer',
+                boxShadow: '-4px 4px 0 #930B6A',
+                transition: 'transform 0.2s ease',
+                zIndex: 10000,
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.5rem'
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+              onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+            >
+              DETAILS
+              <Image 
+                src="/assets/triangle.svg" 
+                alt="Dropdown" 
+                width={16} 
+                height={16} 
+                style={{ 
+                  transform: isDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                  transition: 'transform 0.2s ease'
+                }} 
+              />
+            </button>
+            {isDropdownOpen && (
+              <div className="details-dropdown-content" style={{
+                position: 'absolute',
+                top: '100%',
+                marginTop: '0.5rem',
+                backgroundColor: 'white',
+                borderRadius: '0.5rem',
+                padding: '1rem',
+                width: '100%',
+                textAlign: 'center',
+                zIndex: 10001,
+                boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)'
+              }}>
+                <p style={{ color: '#142B70', fontSize: '1.6rem', margin: 0, lineHeight: '1.4' }}>
+                  Activities in Slack here
+                </p>
+              </div>
+            )}
+          </div>
+        )}
+        {step.title === 'SHIP' && !isBeginner && (
+          <button
+            className="form-button"
+            style={{
+              backgroundColor: '#EE00A7',
+              color: 'white',
+              padding: '0.75rem 1.5rem',
+              borderRadius: '0.5rem',
+              fontSize: '1.8rem',
+              fontWeight: 'bold',
+              border: 'none',
+              cursor: 'pointer',
+              boxShadow: '-4px 4px 0 #930B6A',
+              transition: 'transform 0.2s ease',
+              zIndex: 10000,
+              display: 'inline-block',
+              marginTop: '0.5rem'
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+            onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+          >
+            FORM
+          </button>
+        )}
       </div>
       {step.title === 'BUILD' && !isBeginner && (
         <Image
@@ -182,15 +416,15 @@ const StepColumn = ({ step, index, isBeginner, decorations = [], rectangleWidth 
 
 const beginnerDecorations: Record<string, DecorationImage[]> = {
   BUILD: [
-    { src: '/assets/explanation-godorpheus.svg', alt: 'Godorpheus', width: 150, height: 150, position: { bottom: '-3.5rem', left: '-1rem' } },
-    { src: '/assets/explanation-heidi.svg', alt: 'Heidi', width: 150, height: 150, position: { bottom: '-3.5rem', right: '-2.5rem' } }
+    { src: '/assets/explanation-godorpheus.svg', alt: 'Godorpheus', width: 150, height: 150, position: { bottom: '-1.5rem', left: '-6rem' } },
+    { src: '/assets/explanation-heidi.svg', alt: 'Heidi', width: 150, height: 150, position: { bottom: '-2rem', right: '-4.5rem' } }
   ],
   SHIP: [
-    { src: '/assets/explanation-console.svg', alt: 'Console', width: 240, height: 240, position: { bottom: '-6.5rem', left: '-3.5rem' } },
-    { src: '/assets/explanation-orpheus.svg', alt: 'Orpheus', width: 220, height: 220, position: { bottom: '-4rem', right: '-5rem' } }
+    { src: '/assets/explanation-console.svg', alt: 'Console', width: 240, height: 240, position: { bottom: '-8rem', left: '-5rem' } },
+    { src: '/assets/explanation-orpheus.svg', alt: 'Orpheus', width: 220, height: 220, position: { bottom: '-6rem', right: '-5rem' } }
   ],
   EARN: [
-    { src: '/assets/explanation-tamagotchi.svg', alt: 'Tamagotchi', width: 190, height: 190, position: { bottom: '-3.5rem', left: '-3rem' } },
+    { src: '/assets/explanation-tamagotchi.svg', alt: 'Tamagotchi', width: 190, height: 190, position: { bottom: '-3.5rem', left: '-4rem' } },
     { src: '/assets/explanation-trophy.svg', alt: 'Trophy', width: 190, height: 190, position: { bottom: '-3.5rem', right: '-5rem' } }
   ]
 };
@@ -396,7 +630,7 @@ export default function Explanation() {
 
         {renderSectionHeader(beginnerSection)}
         
-        <div className="steps-container" style={{ backgroundColor: '#224CCA', display: 'flex', justifyContent: 'center', gap: '3rem', padding: '0rem 8rem 2rem 8rem', marginTop: '0' }}>
+        <div className="steps-container beginner-steps-container" style={{ backgroundColor: '#224CCA', display: 'flex', justifyContent: 'center', gap: '3rem', padding: '0rem 8rem 2rem 8rem', marginTop: '0', position: 'relative', zIndex: 10000 }}>
           {beginnerSection.steps.map((step, index) => (
             <StepColumn
               key={step.title}
@@ -411,7 +645,7 @@ export default function Explanation() {
 
         {renderSectionHeader(experiencedSection)}
         
-        <div className="steps-container" style={{ backgroundColor: '#224CCA', display: 'flex', justifyContent: 'center', gap: '3rem', padding: '0rem 8rem 2rem 8rem', marginTop: '0', position: 'relative' }}>
+        <div className="steps-container experienced-steps-container" style={{ backgroundColor: '#224CCA', display: 'flex', justifyContent: 'center', gap: '3rem', padding: '0rem 8rem 2rem 8rem', marginTop: '0', position: 'relative', zIndex: 1 }}>
           {experiencedSection.steps.map((step, index) => (
             <StepColumn
               key={step.title}
@@ -423,6 +657,8 @@ export default function Explanation() {
             />
           ))}
         </div>
+
+        <div style={{ backgroundColor: '#142B70', height: '2rem', width: '100%' }}></div>
       </div>
     </section>
   );
