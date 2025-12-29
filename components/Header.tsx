@@ -43,7 +43,7 @@ export default function Header() {
             </div>
             <div className="header-text-container" style={{ textAlign: 'center', width: '100%', marginTop: '-4rem' }}>
               <p style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', margin: '0', lineHeight: '1' }}>BUILD GAMES, EARN PRIZES</p>
-              <p style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', margin: '0', lineHeight: '1', marginTop: '-0.5rem' }}>Jan 1 - Feb 1</p>
+              <p style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', margin: '0', lineHeight: '1', marginTop: '-0.5rem' }}>starting Jan 1, 2026</p>
               <div className="header-triangle-container" style={{ display: 'flex', justifyContent: 'center', marginTop: '2.5rem', marginBottom: '3rem' }}>
                 <Image
                   src="/assets/triangle.svg"
