@@ -157,7 +157,10 @@ const StepColumn = ({ step, index, isBeginner, decorations = [], rectangleWidth 
         ))}
         <p className="step-rectangle-text" style={{ color: 'white', textAlign: 'center', margin: 0, fontSize: '2rem', lineHeight: '1.2', marginBottom: (step.title === 'BUILD' && isBeginner) || (step.title === 'SHIP' && isBeginner) || (step.title === 'BUILD' && !isBeginner) || (step.title === 'PLAY' && !isBeginner) || (step.title === 'SHIP' && !isBeginner) ? '0.5rem' : '0' }}>{step.description}</p>
         {step.title === 'SHIP' && isBeginner && (
-          <button
+          <a
+            href="https://forms.hackclub.com/jumpstart-beginner"
+            target="_blank"
+            rel="noopener noreferrer"
             className="form-button"
             style={{
               backgroundColor: '#EE00A7',
@@ -172,13 +175,14 @@ const StepColumn = ({ step, index, isBeginner, decorations = [], rectangleWidth 
               transition: 'transform 0.2s ease',
               zIndex: 10000,
               display: 'inline-block',
-              marginTop: '0.5rem'
+              marginTop: '0.5rem',
+              textDecoration: 'none'
             }}
             onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
             onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
           >
             FORM
-          </button>
+          </a>
         )}
         {step.title === 'BUILD' && isBeginner && (
           <div 
@@ -366,7 +370,10 @@ const StepColumn = ({ step, index, isBeginner, decorations = [], rectangleWidth 
           </div>
         )}
         {step.title === 'SHIP' && !isBeginner && (
-          <button
+          <a
+            href="https://submit.hackclub.com/jumpstart"
+            target="_blank"
+            rel="noopener noreferrer"
             className="form-button"
             style={{
               backgroundColor: '#EE00A7',
@@ -381,13 +388,14 @@ const StepColumn = ({ step, index, isBeginner, decorations = [], rectangleWidth 
               transition: 'transform 0.2s ease',
               zIndex: 10000,
               display: 'inline-block',
-              marginTop: '0.5rem'
+              marginTop: '0.5rem',
+              textDecoration: 'none'
             }}
             onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
             onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
           >
             FORM
-          </button>
+          </a>
         )}
       </div>
       {step.title === 'BUILD' && !isBeginner && (
