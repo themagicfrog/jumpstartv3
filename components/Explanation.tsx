@@ -18,7 +18,7 @@ const beginnerSection: Section = {
   steps: [
     {
       title: 'BUILD',
-      description: 'Use our very easy-to-follow resources to make your own 2D platformer game.',
+      description: 'Use our resources to make your own 2D platformer game.',
     },
     {
       title: 'SHIP',
@@ -123,9 +123,29 @@ interface StepColumnProps {
 
 const StepColumn = ({ step, index, isBeginner, decorations = [], rectangleWidth }: StepColumnProps) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const titleImageSrc = isBeginner 
     ? `/assets/explanation-title${index + 1}.svg`
     : `/assets/exxplanation-title${index + 1}-2.svg`;
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    if (isDropdownOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener('touchstart', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleClickOutside);
+    };
+  }, [isDropdownOpen]);
 
   const columnZIndex = !isBeginner && (step.title === 'BUILD' || step.title === 'SHIP') ? 20 : ((isBeginner && step.title === 'BUILD' && isDropdownOpen) || (!isBeginner && (step.title === 'BUILD' || step.title === 'PLAY') && isDropdownOpen) ? 10002 : 'auto');
   
@@ -174,9 +194,13 @@ const StepColumn = ({ step, index, isBeginner, decorations = [], rectangleWidth 
               boxShadow: '-4px 4px 0 #930B6A',
               transition: 'transform 0.2s ease',
               zIndex: 10000,
-              display: 'inline-block',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
               marginTop: '0.5rem',
-              textDecoration: 'none'
+              textDecoration: 'none',
+              minHeight: '44px',
+              minWidth: '44px'
             }}
             onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
             onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
@@ -186,12 +210,14 @@ const StepColumn = ({ step, index, isBeginner, decorations = [], rectangleWidth 
         )}
         {step.title === 'BUILD' && isBeginner && (
           <div 
+            ref={dropdownRef}
             style={{ position: 'relative', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '0.5rem', zIndex: 10000 }}
             onMouseEnter={() => setIsDropdownOpen(true)}
             onMouseLeave={() => setIsDropdownOpen(false)}
           >
             <button
               className="details-dropdown-button"
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
               style={{
                 backgroundColor: '#EE00A7',
                 color: 'white',
@@ -206,7 +232,9 @@ const StepColumn = ({ step, index, isBeginner, decorations = [], rectangleWidth 
                 zIndex: 10000,
                 display: 'flex',
                 alignItems: 'center',
-                gap: '0.5rem'
+                gap: '0.5rem',
+                minHeight: '44px',
+                minWidth: '44px'
               }}
               onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
               onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
@@ -224,41 +252,73 @@ const StepColumn = ({ step, index, isBeginner, decorations = [], rectangleWidth 
               />
             </button>
             {isDropdownOpen && (
-              <div className="details-dropdown-content" style={{
-                position: 'absolute',
-                top: '100%',
-                marginTop: '0.5rem',
-                backgroundColor: 'white',
-                borderRadius: '0.5rem',
-                padding: '1rem',
-                width: '100%',
-                textAlign: 'center',
-                zIndex: 10001,
-                boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)'
-              }}>
-                <p style={{ color: '#142B70', fontSize: '1.6rem', margin: 0, lineHeight: '1.4' }}>
-                  Written, video, and slideshow guide{' '}
-                  <a 
-                    href="https://jams.hackclub.com/jam/godot-platformer" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    style={{ color: '#EE00A7', textDecoration: 'underline', fontWeight: 'bold' }}
-                  >
-                    HERE
-                  </a>
-                </p>
+              <>
+                <div 
+                  style={{
+                    position: 'absolute',
+                    top: '100%',
+                    left: 0,
+                    right: 0,
+                    height: '12rem',
+                    zIndex: 10000
+                  }}
+                  onMouseEnter={() => setIsDropdownOpen(true)}
+                />
+                <div className="details-dropdown-content" style={{
+                  position: 'absolute',
+                  top: '100%',
+                  marginTop: '0.25rem',
+                  backgroundColor: 'white',
+                  borderRadius: '0.5rem',
+                  padding: '1rem',
+                  width: '100%',
+                  textAlign: 'center',
+                  zIndex: 10001,
+                  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '0.75rem',
+                  pointerEvents: 'auto'
+                }}>
+                <a 
+                  href="https://jams.hackclub.com/jam/godot-platformer" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  style={{ color: '#EE00A7', textDecoration: 'underline', fontWeight: 'bold', fontSize: '1.6rem', lineHeight: '1.4', padding: '0.5rem', minHeight: '44px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                >
+                  Written Guide
+                </a>
+                <a 
+                  href="https://www.youtube.com/watch?v=G7iZHazD4wo" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  style={{ color: '#EE00A7', textDecoration: 'underline', fontWeight: 'bold', fontSize: '1.6rem', lineHeight: '1.4', padding: '0.5rem', minHeight: '44px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                >
+                  Video Tutorial
+                </a>
+                <a 
+                  href="https://www.figma.com/slides/j0xld5JL1PLVmndZPV6YSi/Godot-Platformer-Guide--Jumpstart-?node-id=1-42&t=YvoFRsTHrLei0iRJ-1" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  style={{ color: '#EE00A7', textDecoration: 'underline', fontWeight: 'bold', fontSize: '1.6rem', lineHeight: '1.4', padding: '0.5rem', minHeight: '44px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                >
+                  Slideshow Presentation
+                </a>
               </div>
+              </>
             )}
           </div>
         )}
         {step.title === 'BUILD' && !isBeginner && (
           <div 
+            ref={dropdownRef}
             style={{ position: 'relative', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '0.5rem', zIndex: 10000 }}
             onMouseEnter={() => setIsDropdownOpen(true)}
             onMouseLeave={() => setIsDropdownOpen(false)}
           >
             <button
               className="details-dropdown-button"
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
               style={{
                 backgroundColor: '#EE00A7',
                 color: 'white',
@@ -273,7 +333,9 @@ const StepColumn = ({ step, index, isBeginner, decorations = [], rectangleWidth 
                 zIndex: 10000,
                 display: 'flex',
                 alignItems: 'center',
-                gap: '0.5rem'
+                gap: '0.5rem',
+                minHeight: '44px',
+                minWidth: '44px'
               }}
               onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
               onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
@@ -291,33 +353,57 @@ const StepColumn = ({ step, index, isBeginner, decorations = [], rectangleWidth 
               />
             </button>
             {isDropdownOpen && (
-              <div className="details-dropdown-content" style={{
-                position: 'absolute',
-                top: '100%',
-                marginTop: '0.5rem',
-                backgroundColor: 'white',
-                borderRadius: '0.5rem',
-                padding: '1rem',
-                width: '100%',
-                textAlign: 'center',
-                zIndex: 10001,
-                boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)'
-              }}>
-                <p style={{ color: '#142B70', fontSize: '1.6rem', margin: 0, lineHeight: '1.4' }}>
-                  Instructions in Slack here
-                </p>
-              </div>
+              <>
+                <div 
+                  style={{
+                    position: 'absolute',
+                    top: '100%',
+                    left: 0,
+                    right: 0,
+                    height: '6rem',
+                    zIndex: 10000
+                  }}
+                  onMouseEnter={() => setIsDropdownOpen(true)}
+                />
+                <div className="details-dropdown-content" style={{
+                  position: 'absolute',
+                  top: '100%',
+                  marginTop: '0.25rem',
+                  backgroundColor: 'white',
+                  borderRadius: '0.5rem',
+                  padding: '1rem',
+                  width: '100%',
+                  textAlign: 'center',
+                  zIndex: 10001,
+                  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)',
+                  pointerEvents: 'auto'
+                }}>
+                  <p style={{ color: '#142B70', fontSize: '1.6rem', margin: 0, lineHeight: '1.4', padding: '0.5rem' }}>
+                    Instructions in Slack{' '}
+                    <a 
+                      href="https://hackclub.enterprise.slack.com/docs/T0266FRGM/F0A6MFGFW56" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      style={{ color: '#EE00A7', textDecoration: 'underline', fontWeight: 'bold', padding: '0.25rem', minHeight: '44px', display: 'inline-flex', alignItems: 'center' }}
+                    >
+                      here
+                    </a>
+                  </p>
+                </div>
+              </>
             )}
           </div>
         )}
         {step.title === 'PLAY' && !isBeginner && (
           <div 
+            ref={dropdownRef}
             style={{ position: 'relative', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '0.5rem', zIndex: 10000 }}
             onMouseEnter={() => setIsDropdownOpen(true)}
             onMouseLeave={() => setIsDropdownOpen(false)}
           >
             <button
               className="details-dropdown-button"
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
               style={{
                 backgroundColor: '#EE00A7',
                 color: 'white',
@@ -332,7 +418,9 @@ const StepColumn = ({ step, index, isBeginner, decorations = [], rectangleWidth 
                 zIndex: 10000,
                 display: 'flex',
                 alignItems: 'center',
-                gap: '0.5rem'
+                gap: '0.5rem',
+                minHeight: '44px',
+                minWidth: '44px'
               }}
               onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
               onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
@@ -350,22 +438,44 @@ const StepColumn = ({ step, index, isBeginner, decorations = [], rectangleWidth 
               />
             </button>
             {isDropdownOpen && (
-              <div className="details-dropdown-content" style={{
-                position: 'absolute',
-                top: '100%',
-                marginTop: '0.5rem',
-                backgroundColor: 'white',
-                borderRadius: '0.5rem',
-                padding: '1rem',
-                width: '100%',
-                textAlign: 'center',
-                zIndex: 10001,
-                boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)'
-              }}>
-                <p style={{ color: '#142B70', fontSize: '1.6rem', margin: 0, lineHeight: '1.4' }}>
-                  Activities in Slack here
-                </p>
-              </div>
+              <>
+                <div 
+                  style={{
+                    position: 'absolute',
+                    top: '100%',
+                    left: 0,
+                    right: 0,
+                    height: '6rem',
+                    zIndex: 10000
+                  }}
+                  onMouseEnter={() => setIsDropdownOpen(true)}
+                />
+                <div className="details-dropdown-content" style={{
+                  position: 'absolute',
+                  top: '100%',
+                  marginTop: '0.25rem',
+                  backgroundColor: 'white',
+                  borderRadius: '0.5rem',
+                  padding: '1rem',
+                  width: '100%',
+                  textAlign: 'center',
+                  zIndex: 10001,
+                  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)',
+                  pointerEvents: 'auto'
+                }}>
+                  <p style={{ color: '#142B70', fontSize: '1.6rem', margin: 0, lineHeight: '1.4', padding: '0.5rem' }}>
+                    Details in Slack{' '}
+                    <a 
+                      href="https://hackclub.enterprise.slack.com/docs/T0266FRGM/F0A60JA00KD" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      style={{ color: '#EE00A7', textDecoration: 'underline', fontWeight: 'bold', padding: '0.25rem', minHeight: '44px', display: 'inline-flex', alignItems: 'center' }}
+                    >
+                      here
+                    </a>
+                  </p>
+                </div>
+              </>
             )}
           </div>
         )}
@@ -387,9 +497,13 @@ const StepColumn = ({ step, index, isBeginner, decorations = [], rectangleWidth 
               boxShadow: '-4px 4px 0 #930B6A',
               transition: 'transform 0.2s ease',
               zIndex: 10000,
-              display: 'inline-block',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
               marginTop: '0.5rem',
-              textDecoration: 'none'
+              textDecoration: 'none',
+              minHeight: '44px',
+              minWidth: '44px'
             }}
             onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
             onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
