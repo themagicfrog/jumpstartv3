@@ -98,7 +98,7 @@ const games = [
     title: 'The Birb',
     image: '/assets/thebirb.png',
     alt: 'The Birb',
-    creator: 'Neya, 12 years old, USA',
+    creator: 'Neya, 13 years old, USA',
     description: 'A platformer where you fly around and collect candy for the winter',
     link: 'https://that-blob.itch.io/the-birb'
   }
